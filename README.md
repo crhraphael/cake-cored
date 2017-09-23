@@ -1,20 +1,18 @@
 # cake-cored README
 
-This is the README for your extension "cake-cored". After writing up a brief description, we recommend including the following sections.
+Simple vs-code Extension that outputs the current Debug value from your current opened project and allows the change of this value with a simple click on the Status bar indicator of VS Code.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+The status bar label shows the current Debug value from your project.
 
-For example if there is an image subfolder under your extension project workspace:
+When clicked, it triggers the 'changeDebugValue' command that changes the value automatically for you.
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+It only works if your project has the ./config/app.php or the ./app/Config/core.php file. If not it doesn't start.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Works on CakePHP 2^ and CakePHP 3^ while the ./config/app.php or the ./app/Config/core.php files exists.
 
 ## Extension Settings
 
