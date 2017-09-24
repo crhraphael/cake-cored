@@ -2,6 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as fs from 'fs';
 //import {window, commands, Disposable, ExtensionContext, StatusBarAlignment, StatusBarItem, TextDocument} from 'vscode'
 
 // this method is called when your extension is activated
@@ -16,24 +17,23 @@ export function activate(context: vscode.ExtensionContext) {
     //let controller = new WordCounterController(wordCounter);
     
     let debugState = new DebugState();
-    let debugStateController = new DebugStateController(debugState);
+    //let debugStateController = new DebugStateController(debugState);
 
     //wordCounter.updateWordCount();
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
     let disposable = vscode.commands.registerCommand('extension.changeDebugValue', () => {
-    //    wordCounter.updateWordCount();
-        //console.log('HELLO WORLD!');
+        //    wordCounter.updateWordCount();
+            //console.log('HELLO WORLD!');
+            debugState.change();
+            // The code you place here will be executed every time your command is executed
     
-        // The code you place here will be executed every time your command is executed
-
-        // Display a message box to the user
-        //vscode.window.showInformationMessage('Hello World!');
+            // Display a message box to the user
+            //vscode.window.showInformationMessage('Hello World!');
     });
-
-    context.subscriptions.push(debugState);
-    context.subscriptions.push(debugStateController);
+    //context.subscriptions.push(debugState);
+    //context.subscriptions.push(debugStateController);
     context.subscriptions.push(disposable);
 }
 
@@ -94,8 +94,6 @@ class WordCounter {
     }
 }
 
-
-
 class WordCounterController {
     private _wordCounter: WordCounter;
     private _disposable: vscode.Disposable;
@@ -124,7 +122,80 @@ class WordCounterController {
 
 class DebugState {
     private _disposable : vscode.Disposable;
-    
+    private _statusBarItem : vscode.StatusBarItem;
+    private _debugValue : boolean;
+
+    constructor() {
+        this._debugValue = this._getDebugValue();
+        console.log("The new _debugValue is " + this._debugValue);
+
+    }
+
+    public update() {
+        //Create as needed
+        if(!this._statusBarItem) {
+            this._statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
+        }
+        
+        this._statusBarItem.command = "extension.changeDebugValue";
+
+        //let wordCount = this._getWordCount(doc);
+        
+        //Update the status bar
+        this._debugValue = !this._debugValue;
+        this._statusBarItem.text = `CakePHP Debug value is ${this._debugValue}`;
+        this._statusBarItem.show();
+    }
+
+    private _getDebugValue(): any {
+        console.log("Getting Value...");
+        let startingPosition = 0;
+        let finalDebugDefinition;
+
+        let fileContent = fs.readFileSync(vscode.workspace.rootPath + '/config/app.php', 'utf8');
+        //if(err) {
+        //    console.error("Could not open file: %s", err);
+            //process.exit(1);
+        //    return "Erro ao abrir arquivo";
+        //}
+        
+        startingPosition = fileContent.indexOf("env('DEBUG',");
+        
+
+        finalDebugDefinition = fileContent.substr(startingPosition, 19);
+
+        console.log("Value found: " + /true/.test(finalDebugDefinition));
+
+
+        return /true/.test(finalDebugDefinition);
+    }
+
+    public change() {
+        let fileContent = fs.readFileSync(vscode.workspace.rootPath + '/config/app.php', 'utf8');
+            //if(err) {
+            //    console.error("Could not open file: %s", err);
+                //process.exit(1);
+            //    return "Erro ao abrir arquivo";
+            //}
+
+            let finalDebugDefinition = `env('DEBUG', ${!this._debugValue})`;
+
+            fileContent = fileContent.replace(`env('DEBUG', ${this._debugValue})`, finalDebugDefinition);
+            console.log(`OLD ONE: env('DEBUG', ${this._debugValue})`);
+            console.log("NEXT ONE: " + finalDebugDefinition);
+            console.log("PATH: " + vscode.workspace.rootPath + '/config/app.php');
+            console.log(fileContent);
+
+            fs.writeFileSync(vscode.workspace.rootPath + '/config/app.php', fileContent, 'utf-8');
+                //if (err) {
+                //    throw err;
+                //}
+
+                this.update();
+                console.log('File save complete, Debug mode set to ' + !this._debugValue);
+            //});  
+    }
+
     public dispose() {
         this._disposable.dispose();
     }
@@ -136,7 +207,7 @@ class DebugStateController {
 
     constructor(debugState: DebugState) {
         this._debugState = debugState;
-        //this._debugState.updateWordCount();
+        this._debugState.update();
 
         //Subscribe to selection change and editor activation events
         let subscriptions: vscode.Disposable[] = [];
