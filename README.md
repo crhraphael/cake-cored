@@ -1,14 +1,13 @@
-# cake-cored README
+# CakeCORED README
 
-Simple vs-code Extension that outputs the current Debug value from your current opened project and allows the change of this value with a simple click on the Status bar indicator of VS Code.
+Simple vs-code Extension that outputs the current Debug value from your current opened project and allows changing the DEBUG value with a simple click on the Status bar label.
 
 ## Features
 
 The status bar label shows the current Debug value from your project.
 
-When clicked, it triggers the 'changeDebugValue' command that changes the value automatically for you.
+When clicked, it changes the Debug value from app.php or core.php automatically for you.
 
-It only works if your project has the ./config/app.php or the ./app/Config/core.php file. If not it doesn't start.
 
 ## Requirements
 
@@ -33,17 +32,9 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 Users appreciate release notes as you update your extension.
 
-### 1.0.0
+### 0.0.1
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Initial release of CakeCORED with basic functions.
 
 -----------------------------------------------------------------------------------------------------------
 

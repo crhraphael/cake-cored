@@ -1,9 +1,9 @@
 {
     "name": "cake-cored",
-    "displayName": "cake-cored",
+    "displayName": "CakeCORED",
     "description": "creates a simple label on status bar that shows the Debug value and, when clicked, it changes the current CakePHP loaded project debug value.",
-    "version": "0.0.1",
-    "publisher": "Crhistian Raphael - crhistian_raphael@hotmail.com",
+    "version": "0.0.2",
+    "publisher": "Crhistian",
     "engines": {
         "vscode": "^1.5.0"
     },
@@ -11,15 +11,17 @@
         "Other"
     ],
     "activationEvents": [
-        "workspaceContains:**/app.php",
-        "workspaceContains:**/core.php"
+        "workspaceContains:/config/app.php",
+        "workspaceContains:/app/Config/core.php"
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.changeDebugValue",
-            "title": "Change Cake Debug Value"
-        }]
+        "commands": [
+            {
+                "command": "extension.changeDebugValue",
+                "title": "Change Cake Debug Value"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
