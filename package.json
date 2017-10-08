@@ -1,8 +1,8 @@
 {
     "name": "cake-cored",
     "displayName": "CakeCORED",
-    "description": "creates a simple label on status bar that shows the Debug value and, when clicked, it changes the current CakePHP loaded project debug value.",
-    "version": "0.0.2",
+    "description": "Integrates CakePHP framework common functions into the vs-code editor.",
+    "version": "1.0.0",
     "publisher": "Crhistian",
     "engines": {
         "vscode": "^1.5.0"
@@ -11,8 +11,7 @@
         "Other"
     ],
     "activationEvents": [
-        "workspaceContains:/config/app.php",
-        "workspaceContains:/app/Config/core.php"
+        "workspaceContains:/index.php"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -21,7 +20,33 @@
                 "command": "extension.changeDebugValue",
                 "title": "Change Cake Debug Value"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "CakeCOREDconfigurations",
+            "properties": {
+                "cake-cored.debugHelper": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Shows a Status bar item that when clicked changes the debug value of the framework."
+                },
+                "cake-cored.databaseHelper": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Allows complete control over database configuration and stores user predefined databases settings."
+                },
+				"cake-cored.enabled": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Is save in local history enabled (Never=0, Always=1, Limited to workspaceFolder=2)"
+				},
+				"cake-cored.path": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Specify a location for .cakecored folder (null: use workspaceFolder)"
+				}
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
