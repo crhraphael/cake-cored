@@ -19,9 +19,11 @@ Works with CakePHP 2^ and CakePHP 3^ while the ./config/app.php or the ./app/Con
 * `cake-cored.enable`: {true/false} enable/disable this extension.
 * `cake-cored.debugHelper`: {true/false} enable/disable the Debug Helper interface.
 
-## Known Issues
+## General Feedback
 
+Please, if you want to contribute to this project somehow (organization, development or even providing sugestions for future implementations) send an email to **crhistian_raphael@hotmail.com**. 
 
+Any kind of support would be appreciated!
 
 ## Release Notes
 
@@ -29,7 +31,7 @@ Works with CakePHP 2^ and CakePHP 3^ while the ./config/app.php or the ./app/Con
 
 ### 0.0.1
 
-Initial release of CakeCORED with basic functions.
+Initial release of CakeCORED with basic functions and concepts.
 
 ### 1.0.0
 
