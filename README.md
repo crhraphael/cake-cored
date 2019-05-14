@@ -18,7 +18,7 @@ If you're wondering how does it works here are the steps:
 * Then it holds the index and do a str_split for proccessing the value written on the file.
 * After that, there are functions that translate and change the value accordingly to CakePHP's version.
 
-**DATABASE HELPER**: Comming soon!!
+**DATABASE HELPER**: Coming soon!!
 
 
 ## Requirements
@@ -45,7 +45,7 @@ Any kind of support would be appreciated!
 The basic thoughts on it was: 
 
 * Having a *main class* that controls functions of this plugin was a necessity.
-* Every functionality has it's own classes and libs if needed.
+* Every functionality has its own classes and libs if needed.
 
 Surely there may be weak spots somewhere. I would like suggestions about it. Share your thoughts if you want to. Let's get better coding together! =)
 
